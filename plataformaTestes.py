@@ -10,11 +10,18 @@ def main (page: ft.Page):
         page.splash.visible = True
         page.theme_mode = "dark" if page.theme_mode == "light" else "light"
         page.update()
-
         time.sleep(0.5)
         toggledarklight.selected = not toggledarklight.selected
         page.splash.visible = False
         page.update()
+
+
+
+    #TextFields
+    name_txt = ft.TextField(
+        label="Nome",
+    )
+    
 
     #Toggle Dark/Light Mode Button
     toggledarklight = ft.IconButton(
@@ -24,13 +31,15 @@ def main (page: ft.Page):
         style=ft.ButtonStyle(
             color={"":ft.colors.BLACK, "selected":ft.colors.WHITE}
         )
-
     )
 
+    #Start Tests Button
+
     # Page definitions
-    page.title = "Plataforma de Testes"
+    page.title = "Menu - Plataforma de Testes"
     page.theme_mode = "light"
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
+    page.vertical_alignment = ft.MainAxisAlignment.CENTER
     page.scroll= ft.ScrollMode.AUTO
     page.splash = ft.ProgressBar(visible=False)
     page.window_center()
@@ -38,7 +47,8 @@ def main (page: ft.Page):
 
     # Appbar
     page.appbar = ft.AppBar(
-        title= ft.Text("Plataforma de Testes", size=30),
+        title= ft.Text("Plataforma de testes", size=30),
+        center_title=True,
         bgcolor='blue',
         leading=ft.Icon(name="home"), 
         actions=[
@@ -47,6 +57,14 @@ def main (page: ft.Page):
     )
     page.update()
 
+    page.add(
+        ft.Column(
+            controls=[
+                ft.Text("Formulario Inicial"),
+
+            ]
+        )
+    )
     
 
 ft.app(target=main)
