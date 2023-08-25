@@ -70,6 +70,8 @@ class Elementsdropdown(ft.UserControl):
 def main (page: ft.Page):
     page.title = "Menu - Plataforma de Testes"
     page.theme_mode = "light"
+    page.window_width = 450
+    page.padding = 20
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
     page.vertical_alignment = ft.MainAxisAlignment.CENTER
     page.scroll= ft.ScrollMode.AUTO
@@ -77,43 +79,42 @@ def main (page: ft.Page):
     page.window_always_on_top = True
     page.window_center()
 
-    #Toggle Dark/Light Mode
+     #Toggle Dark/Light Mode
     def changetheme(e):
         page.splash.visible = True
         page.theme_mode = "dark" if page.theme_mode == "light" else "light"
         page.update()
+
         time.sleep(0.5)
         toggledarklight.selected = not toggledarklight.selected
         page.splash.visible = False
         page.update()
-    
-    def submit(e):
-        pass
 
+    def submit(e):
+        page.clean()
+        appbar.title = ft.Text("Plataforma de testes", size=30)
+        page.add(appbar)
+
+
+    toggledarklight = ft.IconButton(on_click=changetheme,icon="dark_mode",selected_icon="light_mode",style=ft.ButtonStyle(color={"":ft.colors.BLACK, "selected":ft.colors.WHITE}))
 
     placeholderCountdown = ft.Text("00:00")
-    formtitle = ft.Text(value="Teste de Identidade",style=ft.TextThemeStyle.DISPLAY_SMALL)
+
+    appbar = ft.AppBar(title= ft.Text("Formulario Inicial", size=30),center_title=True,bgcolor='blue',leading=ft.Icon(name="home"),actions=[placeholderCountdown,toggledarklight])
+
     agetextfield = Basetextfield("Informe sua idade", 200)
     genderradiobuttons = Radiobuttons()
     schoolingdropdown = Schoolingdropdown()
     coursetextfield = Basetextfield("Qual curso você realiza atualmente", 300)
     elementsdropdown = Elementsdropdown()
-    submitbutton = ft.FilledButton("Enviar")
+    submitbutton = ft.FilledButton("Enviar",on_click=submit)
 
     page.add(
-        ft.AppBar(
-            title= ft.Text("Plataforma de testes", size=30),
-            center_title=True,
-            bgcolor='blue',
-            leading=ft.Icon(name="home"),
-            actions=[
-                placeholderCountdown,
-                toggledarklight
-            ]
-        ),
+        appbar,
         ft.Column(
+            alignment=ft.MainAxisAlignment.CENTER,
+            spacing=20,
             controls=[
-                formtitle,
                 agetextfield,
                 genderradiobuttons,
                 schoolingdropdown,
