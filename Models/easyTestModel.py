@@ -1,0 +1,2 @@
+class EasyTestModel():
+    pass

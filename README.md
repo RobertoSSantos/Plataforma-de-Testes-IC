@@ -17,4 +17,12 @@ Stack
 - Flet framework
 - Firebase Realtime Database
 
-A plataforma será desenvolvida inteiramente em python, utilizando frameworks como flet para o frontend e o Firebase Realtime Database como banco de dados, os dados armazenados no firebase serão extraídos para um arquivo csv e tratados para melhor visualização. 
+A plataforma será desenvolvida inteiramente em python, utilizando frameworks como flet para o frontend e o Firebase Realtime Database como banco de dados, os dados armazenados no firebase serão extraídos para um arquivo csv e tratados para melhor visualização.
+
+estrutura de modelos:
+* InitialFormModel -> contendo os dados do formulario inicial
+ * EasyTesteModel -> contendo os dados do teste facil
+* MediumTesteModel -> contendo os dados do teste medio
+* HardTesteModel -> contendo os dados do teste dificil
+* FinalFormModel -> contendo os dados do formulario final
+* ResultsModel -> contendo todos os dados obtidos

@@ -1,71 +1,6 @@
+from Controls.initialFormControls import *
 import flet as ft
 import time
-
-class Basetextfield(ft.UserControl):
-    def __init__(self, label,width):
-        super().__init__()
-        self.label = label
-        self.width = width
-    
-    def build(self):
-        return ft.TextField(
-            label=self.label,
-            width=self.width
-        )
-    
-class Radiobuttons(ft.UserControl):
-    def __init__ (self):
-        super().__init__()
-    
-    def build(self):
-        return ft.Column(
-            controls=[
-                ft.Text("Como você se identifica?"),
-                ft.RadioGroup(content=ft.Column([
-                ft.Radio(value="Homem cis", label="Homem cis"),
-                ft.Radio(value="Homem trans", label="Homem trans"),
-                ft.Radio(value="Mulher cis", label="Mulher cis"),
-                ft.Radio(value="Mulher trans", label="Mulher trans"),
-                ft.Radio(value="não-binário", label="não-binário")]))
-            ]
-        )
-
-class Schoolingdropdown(ft.UserControl):
-    def __init__(self):
-        super().__init__()
-    
-    def build(self):
-        return ft.Dropdown(
-            label="Escolaridade",
-            hint_text="Selecione seu nivel de escolaridade",
-            width=400,
-            options=[
-                ft.dropdown.Option("Ensino Fundamental"),
-                ft.dropdown.Option("Ensino Médio"),
-                ft.dropdown.Option("Ensino Superior"),
-                ft.dropdown.Option("Pós-graduação"),
-                ft.dropdown.Option("Mestrado"),
-                ft.dropdown.Option("Doutorado"),
-                ft.dropdown.Option("Pós-doutorado")
-            ],
-        )
-
-class Elementsdropdown(ft.UserControl):
-    def __init__(self):
-        super().__init__()
-    
-    def build(self):
-        return ft.Dropdown(
-            label="Elementos de maquina",
-            hint_text="Qual seu nivel de conhecimento sobre elementos de maquina",
-            width=400,
-            options=[
-                ft.dropdown.Option("Nenhum"),
-                ft.dropdown.Option("Tenho pouco conhecimento"),
-                ft.dropdown.Option("Estou aprendendo atualmente"),
-                ft.dropdown.Option("Tenho um bom entendimento"),
-            ],
-        )
 
 def main (page: ft.Page):
     page.title = "Menu - Plataforma de Testes"
@@ -79,12 +14,11 @@ def main (page: ft.Page):
     page.window_always_on_top = True
     page.window_center()
 
-     #Toggle Dark/Light Mode
+    #Toggle Dark/Light Mode
     def changetheme(e):
         page.splash.visible = True
         page.theme_mode = "dark" if page.theme_mode == "light" else "light"
         page.update()
-
         time.sleep(0.5)
         toggledarklight.selected = not toggledarklight.selected
         page.splash.visible = False
@@ -94,7 +28,6 @@ def main (page: ft.Page):
         page.clean()
         appbar.title = ft.Text("Plataforma de testes", size=30)
         page.add(appbar)
-
 
     toggledarklight = ft.IconButton(on_click=changetheme,icon="dark_mode",selected_icon="light_mode",style=ft.ButtonStyle(color={"":ft.colors.BLACK, "selected":ft.colors.WHITE}))
 
