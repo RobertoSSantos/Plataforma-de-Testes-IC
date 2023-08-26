@@ -72,3 +72,27 @@ class Elementsdropdown(ft.UserControl):
                 ft.dropdown.Option("Tenho um bom entendimento"),
             ],
         )
+
+class InitialForm(ft.UserControl):
+    def __init__(self, agetextfield_ref, coursetextfield_ref, genderradiobuttons_ref, schoolingdropdown_ref, elementsdropdown_ref,btn_onclick):
+        super().__init__()
+        self.agetextfield_ref = agetextfield_ref
+        self.coursetextfield_ref = coursetextfield_ref
+        self.genderradiobuttons_ref = genderradiobuttons_ref
+        self.schoolingdropdown_ref = schoolingdropdown_ref
+        self.elementsdropdown_ref = elementsdropdown_ref
+        self.btn_onclick = btn_onclick
+    
+    def build(self):
+        return ft.Column(
+            alignment=ft.MainAxisAlignment.CENTER,
+            spacing=20,
+            controls=[
+                Basetextfield("Informe sua idade", 200, self.agetextfield_ref),
+                Radiobuttons(self.genderradiobuttons_ref),
+                Schoolingdropdown(self.schoolingdropdown_ref),
+                Basetextfield("Qual curso você realiza atualmente", 300, self.coursetextfield_ref),
+                Elementsdropdown(self.elementsdropdown_ref),
+                ft.FilledButton("Enviar",on_click=self.btn_onclick)
+            ]
+        )

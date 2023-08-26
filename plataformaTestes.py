@@ -71,7 +71,7 @@ def main (page: ft.Page):
         closedlg(e)
         page.clean()
         appbar.title = ft.Text("Plataforma de testes", size=30)
-        page.add(appbar)
+        page.update()
 
     toggledarklight = ft.IconButton(on_click=changetheme,icon="dark_mode",selected_icon="light_mode",style=ft.ButtonStyle(color={"":ft.colors.BLACK, "selected":ft.colors.WHITE}))
 
@@ -84,27 +84,9 @@ def main (page: ft.Page):
     bs_endFistContext = ft.BottomSheet(ft.Container(ft.Column([ft.Text("Preecha todos os campos!")],tight=True),padding=10),disabled=True)
     page.overlay.append(bs_endFistContext)
 
-    agetextfield = Basetextfield("Informe sua idade", 200, agetextfield_ref)
-    genderradiobuttons = Radiobuttons(genderradiobuttons_ref)
-    schoolingdropdown = Schoolingdropdown(schoolingdropdown_ref)
-    coursetextfield = Basetextfield("Qual curso você realiza atualmente", 300, coursetextfield_ref)
-    elementsdropdown = Elementsdropdown(elementsdropdown_ref)
-    endFistContextbtn = ft.FilledButton("Enviar",on_click=submitInitialForm)
+    initialForm = InitialForm(agetextfield_ref, coursetextfield_ref, genderradiobuttons_ref, schoolingdropdown_ref, elementsdropdown_ref,submitInitialForm)
 
     page.appbar = appbar
-    page.add(
-        ft.Column(
-            alignment=ft.MainAxisAlignment.CENTER,
-            spacing=20,
-            controls=[
-                agetextfield,
-                genderradiobuttons,
-                schoolingdropdown,
-                coursetextfield,
-                elementsdropdown,
-                endFistContextbtn
-            ]
-        ),
-    )
+    page.add(initialForm)
     
 ft.app(target=main)
