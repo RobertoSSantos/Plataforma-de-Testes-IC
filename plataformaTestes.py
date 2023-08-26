@@ -38,16 +38,17 @@ def main (page: ft.Page):
         page.splash.visible = False
         page.update()
 
-    def openbs(e):
-        bs_endFistContext.open = True
-        bs_endFistContext.update()
+    def opensb(e):
+        page.snack_bar = completeAll_sb
+        page.snack_bar.open = True
+        page.update()
 
     def submitInitialForm(e):
         cont = 0
         referenceslists = [agetextfield_ref,coursetextfield_ref,genderradiobuttons_ref,schoolingdropdown_ref,elementsdropdown_ref]
 
         for ref in referenceslists:
-            if not ref.current.value:openbs(e)
+            if not ref.current.value:opensb(e)
             else:cont+=1
         if cont == len(referenceslists):
             page.dialog = dlg_endFistContext
@@ -81,8 +82,7 @@ def main (page: ft.Page):
     
     dlg_endFistContext = ft.AlertDialog(modal=True,title=ft.Text("Confirmação"),content=ft.Text("Deseja iniciar o teste?"),actions=[ft.TextButton("Sim", on_click=endFistContext),ft.TextButton("Não", on_click=closedlg)],actions_alignment=ft.MainAxisAlignment.END,on_dismiss=lambda e: print("dismissed"))
 
-    bs_endFistContext = ft.BottomSheet(ft.Container(ft.Column([ft.Text("Preecha todos os campos!")],tight=True),padding=10),disabled=True)
-    page.overlay.append(bs_endFistContext)
+    completeAll_sb = ft.SnackBar(content=ft.Text("Preencha todos os campos!"))
 
     initialForm = InitialForm(agetextfield_ref, coursetextfield_ref, genderradiobuttons_ref, schoolingdropdown_ref, elementsdropdown_ref,submitInitialForm)
 
