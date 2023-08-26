@@ -1,26 +1,29 @@
 import flet as ft
 
 class Basetextfield(ft.UserControl):
-    def __init__(self, label,width):
+    def __init__(self, label,width,reference):
         super().__init__()
         self.label = label
         self.width = width
+        self.reference = reference
     
     def build(self):
         return ft.TextField(
+            ref=self.reference,
             label=self.label,
             width=self.width
         )
     
 class Radiobuttons(ft.UserControl):
-    def __init__ (self):
+    def __init__ (self,reference):
         super().__init__()
+        self.reference = reference
     
     def build(self):
         return ft.Column(
             controls=[
                 ft.Text("Como você se identifica?"),
-                ft.RadioGroup(content=ft.Column([
+                ft.RadioGroup(ref=self.reference,on_change=lambda e: print(e.control.value),content=ft.Column([
                 ft.Radio(value="Homem cis", label="Homem cis"),
                 ft.Radio(value="Homem trans", label="Homem trans"),
                 ft.Radio(value="Mulher cis", label="Mulher cis"),
@@ -30,11 +33,13 @@ class Radiobuttons(ft.UserControl):
         )
 
 class Schoolingdropdown(ft.UserControl):
-    def __init__(self):
+    def __init__(self, reference):
         super().__init__()
+        self.reference = reference
     
     def build(self):
         return ft.Dropdown(
+            ref=self.reference,
             label="Escolaridade",
             hint_text="Selecione seu nivel de escolaridade",
             width=400,
@@ -50,11 +55,13 @@ class Schoolingdropdown(ft.UserControl):
         )
 
 class Elementsdropdown(ft.UserControl):
-    def __init__(self):
+    def __init__(self, reference):
         super().__init__()
+        self.reference = reference
     
     def build(self):
         return ft.Dropdown(
+            ref=self.reference,
             label="Elementos de maquina",
             hint_text="Qual seu nivel de conhecimento sobre elementos de maquina",
             width=400,
