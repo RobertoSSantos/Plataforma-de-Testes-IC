@@ -82,7 +82,7 @@ def main (page: ft.Page):
     
     dlg_endFistContext = ft.AlertDialog(modal=True,title=ft.Text("Confirmação"),content=ft.Text("Deseja iniciar o teste?"),actions=[ft.TextButton("Sim", on_click=endFistContext),ft.TextButton("Não", on_click=closedlg)],actions_alignment=ft.MainAxisAlignment.END,on_dismiss=lambda e: print("dismissed"))
 
-    completeAll_sb = ft.SnackBar(content=ft.Text("Preencha todos os campos!"))
+    completeAll_sb = ft.SnackBar(content=ft.Text("Preencha todos os campos!",color=ft.colors.RED))
 
     initialForm = InitialForm(agetextfield_ref, coursetextfield_ref, genderradiobuttons_ref, schoolingdropdown_ref, elementsdropdown_ref,submitInitialForm)
 
