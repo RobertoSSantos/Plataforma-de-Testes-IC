@@ -120,11 +120,10 @@ class TrainingItem(ft.UserControl):
             img = ImgTraining("D:\ICpy\Plataforma de Testes IC\TrainingImages\Elast (2).jpg")
         elif self.title.lower() == "elementos de fixacao":
             img = ImgTraining("D:\ICpy\Plataforma de Testes IC\TrainingImages\Fix (3).jpg")
-        else :
+        else:
             print("Error")
         
         self.imglist = [img,img,img]
-        
     
     def build(self):
         self.itembuilder()

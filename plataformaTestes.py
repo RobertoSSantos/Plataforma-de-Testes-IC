@@ -87,9 +87,8 @@ def main (page: ft.Page):
     initialForm = InitialForm(agetextfield_ref, coursetextfield_ref, genderradiobuttons_ref, schoolingdropdown_ref, elementsdropdown_ref,submitInitialForm)
 
     traininglist = [TrainingItem("Elementos de Apoio"),TrainingItem("Elementos Elasticos"),TrainingItem("Elementos de Fixacao"),TrainingItem("Elementos de Vedacao")]
-
-    trainPage = TrainingPage(traininglist)
     
+    trainPage = TrainingPage(traininglist)
 
     page.appbar = appbar
     page.add(initialForm)
