@@ -43,35 +43,35 @@ def main (page: ft.Page):
         page.snack_bar.open = True
         page.update()
 
+    #Modified during tests and development, take out comments and set count to 0
     def submitInitialForm(e):
-        cont = 0
+        cont = 5
         referenceslists = [agetextfield_ref,coursetextfield_ref,genderradiobuttons_ref,schoolingdropdown_ref,elementsdropdown_ref]
-
+        '''
         for ref in referenceslists:
             if not ref.current.value:opensb(e)
             else:cont+=1
+        '''
         if cont == len(referenceslists):
             page.dialog = dlg_endFistContext
             dlg_endFistContext.open = True
             page.update()
 
-    def closedlg(e):
+    def close_endFisrtContext_dlg(e):
         dlg_endFistContext.open = False
         page.update()
 
     def endFistContext(e):
-        '''
-        criar pagina de explicacao
-        '''
         initialFormModel.age = agetextfield_ref.current.value
         initialFormModel.gender = genderradiobuttons_ref.current.value
         initialFormModel.course = coursetextfield_ref.current.value
         initialFormModel.schooling = schoolingdropdown_ref.current.value
         initialFormModel.elements = elementsdropdown_ref.current.value
 
-        closedlg(e)
+        close_endFisrtContext_dlg(e)
         page.clean()
-        appbar.title = ft.Text("Plataforma de testes", size=30)
+        appbar.title = ft.Text("Treinamento - Facil", size=30)
+        page.add(trainPage)
         page.update()
 
     toggledarklight = ft.IconButton(on_click=changetheme,icon="dark_mode",selected_icon="light_mode",style=ft.ButtonStyle(color={"":ft.colors.BLACK, "selected":ft.colors.WHITE}))
@@ -80,13 +80,16 @@ def main (page: ft.Page):
 
     appbar = ft.AppBar(title= ft.Text("Formulario Inicial", size=30),center_title=True,bgcolor='blue',leading=ft.Icon(name="home"),actions=[placeholderCountdown,toggledarklight])
     
-    dlg_endFistContext = ft.AlertDialog(modal=True,title=ft.Text("Confirmação"),content=ft.Text("Deseja iniciar o teste?"),actions=[ft.TextButton("Sim", on_click=endFistContext),ft.TextButton("Não", on_click=closedlg)],actions_alignment=ft.MainAxisAlignment.END,on_dismiss=lambda e: print("dismissed"))
-
-    #new dialog to move in between contexts
+    dlg_endFistContext = ft.AlertDialog(modal=True,title=ft.Text("Confirmação"),content=ft.Text("Deseja iniciar o teste? ao aceitar nao sera possivel voltar ate que o teste seja concluido, e o cronometro sera iniciado."),actions=[ft.TextButton("Sim", on_click=endFistContext),ft.TextButton("Não", on_click=close_endFisrtContext_dlg)],actions_alignment=ft.MainAxisAlignment.END)
 
     completeAll_sb = ft.SnackBar(content=ft.Text("Preencha todos os campos!",color=ft.colors.RED))
 
     initialForm = InitialForm(agetextfield_ref, coursetextfield_ref, genderradiobuttons_ref, schoolingdropdown_ref, elementsdropdown_ref,submitInitialForm)
+
+    traininglist = [TrainingItem("Elementos de Apoio"),TrainingItem("Elementos Elasticos"),TrainingItem("Elementos de Fixacao"),TrainingItem("Elementos de Vedacao")]
+
+    trainPage = TrainingPage(traininglist)
+    
 
     page.appbar = appbar
     page.add(initialForm)

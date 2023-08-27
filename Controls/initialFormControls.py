@@ -73,6 +73,14 @@ class Elementsdropdown(ft.UserControl):
             ],
         )
 
+class ImgTraining(ft.UserControl):
+    def __init__(self,src):
+        super().__init__()
+        self.src = src
+    
+    def build(self):
+        return ft.Image(src=self.src, width=200, height=200,fit=ft.ImageFit.NONE,repeat=ft.ImageRepeat.NO_REPEAT,border_radius=ft.border_radius.all(10))
+
 class InitialForm(ft.UserControl):
     def __init__(self, agetextfield_ref, coursetextfield_ref, genderradiobuttons_ref, schoolingdropdown_ref, elementsdropdown_ref,btn_onclick):
         super().__init__()
@@ -96,3 +104,41 @@ class InitialForm(ft.UserControl):
                 ft.FilledButton("Enviar",on_click=self.btn_onclick)
             ]
         )
+    
+class TrainingItem(ft.UserControl):
+    def __init__(self,title):
+        super().__init__()
+        self.title = title
+        self.imglist = []
+
+    def itembuilder(self):
+        if self.title.lower() == "elementos de vedacao":
+            img = ImgTraining("D:\ICpy\Plataforma de Testes IC\TrainingImages\Ved (2).jpg")
+        elif self.title.lower() == "elementos de apoio":
+            img = ImgTraining("D:\ICpy\Plataforma de Testes IC\TrainingImages\Apo (1).jpg")
+        elif self.title.lower() == "elementos elasticos":
+            img = ImgTraining("D:\ICpy\Plataforma de Testes IC\TrainingImages\Elast (2).jpg")
+        elif self.title.lower() == "elementos de fixacao":
+            img = ImgTraining("D:\ICpy\Plataforma de Testes IC\TrainingImages\Fix (3).jpg")
+        else :
+            print("Error")
+        
+        self.imglist = [img,img,img]
+        
+    
+    def build(self):
+        self.itembuilder()
+        return ft.Column(
+            controls=[
+                ft.Text(value=self.title,text_align=ft.TextAlign.START,size=30),
+                ft.Row(wrap=False,scroll="always",controls=self.imglist)
+            ]
+        )
+    
+class TrainingPage(ft.UserControl):
+    def __init__(self,traininglist):
+        super().__init__()
+        self.traininglist = traininglist
+    
+    def build(self):
+        return ft.Column(controls=self.traininglist)
