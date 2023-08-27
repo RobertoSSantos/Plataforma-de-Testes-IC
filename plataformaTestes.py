@@ -71,14 +71,15 @@ def main (page: ft.Page):
         close_endFisrtContext_dlg(e)
         page.clean()
         appbar.title = ft.Text("Treinamento - Facil", size=30)
+        appbar.actions.insert(0,countdown)
         page.add(trainPage)
         page.update()
 
     toggledarklight = ft.IconButton(on_click=changetheme,icon="dark_mode",selected_icon="light_mode",style=ft.ButtonStyle(color={"":ft.colors.BLACK, "selected":ft.colors.WHITE}))
 
-    placeholderCountdown = ft.Text("00:00")
+    countdown = Countdown(900)
 
-    appbar = ft.AppBar(title= ft.Text("Formulario Inicial", size=30),center_title=True,bgcolor='blue',leading=ft.Icon(name="home"),actions=[placeholderCountdown,toggledarklight])
+    appbar = ft.AppBar(title= ft.Text("Formulario Inicial", size=30),center_title=True,bgcolor='blue',leading=ft.Icon(name="home"),actions=[toggledarklight])
     
     dlg_endFistContext = ft.AlertDialog(modal=True,title=ft.Text("Confirmação"),content=ft.Text("Deseja iniciar o teste? ao aceitar nao sera possivel voltar ate que o teste seja concluido, e o cronometro sera iniciado."),actions=[ft.TextButton("Sim", on_click=endFistContext),ft.TextButton("Não", on_click=close_endFisrtContext_dlg)],actions_alignment=ft.MainAxisAlignment.END)
 
