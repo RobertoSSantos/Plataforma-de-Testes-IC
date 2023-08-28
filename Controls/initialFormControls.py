@@ -220,6 +220,9 @@ class ValidationPage(ft.UserControl):
     '''
     A partir do level setado, serao utilizados diferentes repositorios de imagens
     '''
+    def get_level(self):
+        level = self.level
+        return level
 
     def get_type(self):
         type = self.type
