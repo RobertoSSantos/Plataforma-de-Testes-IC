@@ -198,8 +198,12 @@ def main (page: ft.Page):
     def submitFinalForm(e):
         finalFormModel.teste = "teste"
         print("Teste Finalizado")
-        resultsModel = ResultsModel(initialFormModel, easyTestModel, mediumTestModel, hardTestModel, finalFormModel)
-        print(resultsModel.__dict__)
+        resultsModel = ResultsModel(initialFormModel.__dict__, easyTestModel.__dict__, mediumTestModel.__dict__, hardTestModel.__dict__, finalFormModel.__dict__)
+
+        jsonstr = json.dumps(resultsModel.__dict__)
+        requisicao = requests.post('https://plataforma-testes-ic-default-rtdb.firebaseio.com//entrevistados/.json', data=jsonstr)
+        print(requisicao)
+        print(requisicao.text)
 
 
     def close_endFisrtContext_dlg(e):
