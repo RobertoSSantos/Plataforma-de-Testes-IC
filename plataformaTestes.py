@@ -51,19 +51,15 @@ def main (page: ft.Page):
         if validation_count == 1 or validation_count == 6 or validation_count == 11:
             testmodel.firstAnswer = val
             testmodel.firstAnswerTime = countdown.get_current_time()
-            print("first"+testmodel.firstAnswer)
         elif validation_count == 2 or validation_count == 7 or validation_count == 12:
             testmodel.secondAnswer = val
             testmodel.secondAnswerTime = countdown.get_current_time()
-            print("second" + testmodel.secondAnswer)
         elif validation_count == 3 or validation_count == 8 or validation_count == 13:
             testmodel.thirdAnswer = val
             testmodel.thirdAnswerTime = countdown.get_current_time()
-            print("third"+testmodel.thirdAnswer)
         elif validation_count == 4 or validation_count == 9 or validation_count == 14:
             testmodel.fourthAnswer = val
             testmodel.fourthAnswerTime = countdown.get_current_time()
-            print("last"+testmodel.fourthAnswer)
         else:
             print("Todos os objetos instanciados")
     
@@ -99,14 +95,12 @@ def main (page: ft.Page):
             increment_count()
             mediumTrainingContext()
         elif validation_count > 4 and validation_count <= 8:
-            print("medio")
             validation_builder("Medio")
         elif validation_count == 9:
             reset_list()
             increment_count()
             hardTrainingContext()
         elif validation_count > 9 and validation_count <= 13:
-            print("Dificil")
             validation_builder("Dificil")
         else:
             print("Todas as Validacoes Foram realizadas")
