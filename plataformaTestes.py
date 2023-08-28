@@ -176,13 +176,13 @@ def main (page: ft.Page):
 
     #Modified during tests and development, take out comments and set count to 0
     def submitInitialForm(e):
-        cont = 5
+        cont = 0
         referenceslists = [agetextfield_ref,coursetextfield_ref,genderradiobuttons_ref,schoolingdropdown_ref,elementsdropdown_ref]
-        '''
+        
         for ref in referenceslists:
             if not ref.current.value:opensb(e)
             else:cont+=1
-        '''
+
         if cont == len(referenceslists):
             page.dialog = dlg_easyTrainingContext
             dlg_easyTrainingContext.open = True
