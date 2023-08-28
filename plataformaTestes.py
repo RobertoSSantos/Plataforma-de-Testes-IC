@@ -2,7 +2,7 @@ from Controls.initialFormControls import *
 from Models.allModels import *
 from Service.dataService import *
 import flet as ft
-import time, random
+import time, random, json, requests
 
 baseUrl = "https://plataforma-testes-ic-default-rtdb.firebaseio.com/"
 validation_count = 0
@@ -42,10 +42,6 @@ def main (page: ft.Page):
         global validation_count
         validation_count += 1
 
-    def reset_count():
-        global validation_count
-        validation_count = 0
-
     def reset_list():
         global backup_validation_types
         backup_validation_types = ["Elemento de Vedacao", "Elemento de Apoio", "Elemento de Fixacao", "Elemento Elastico"]
@@ -69,9 +65,8 @@ def main (page: ft.Page):
             testmodel.fourthAnswerTime = countdown.get_current_time()
             print("last"+testmodel.fourthAnswer)
         else:
-            print("Error")
+            print("Todos os objetos instanciados")
     
-    #Toggle Dark/Light Mode
     def changetheme(e):
         page.splash.visible = True
         page.theme_mode = "dark" if page.theme_mode == "light" else "light"
@@ -94,12 +89,10 @@ def main (page: ft.Page):
         validationPage.type = rand_type
         page.add(validationPage)
         increment_count()
-        print("---------------------------")
 
     def validation_observer():
         print(validation_count)
         if validation_count >= 0 and validation_count <= 3:
-            print("facil")
             validation_builder("Facil")
         elif validation_count == 4:
             reset_list()
@@ -116,7 +109,8 @@ def main (page: ft.Page):
             print("Dificil")
             validation_builder("Dificil")
         else:
-            print("Minha Ideia Ta Errada")
+            print("Todas as Validacoes Foram realizadas")
+            finalFormContext()
 
     def vedvalidation(e):
         val = "vazio"
@@ -199,6 +193,14 @@ def main (page: ft.Page):
             page.dialog = dlg_easyTrainingContext
             dlg_easyTrainingContext.open = True
             page.update()
+
+    # Envio do formulario final + envio dos dados para o banco
+    def submitFinalForm(e):
+        finalFormModel.teste = "teste"
+        print("Teste Finalizado")
+        resultsModel = ResultsModel(initialFormModel, easyTestModel, mediumTestModel, hardTestModel, finalFormModel)
+        print(resultsModel.__dict__)
+
 
     def close_endFisrtContext_dlg(e):
         dlg_easyTrainingContext.open = False
@@ -286,6 +288,12 @@ def main (page: ft.Page):
         validation_observer()
         page.update()
 
+    # Define o formulario Final
+    def finalFormContext():
+        page.clean()
+        appbar.title = ft.Text("Formulario Final", size=30)
+        page.add(finalForm)
+
     toggledarklight = ft.IconButton(on_click=changetheme,icon="dark_mode",selected_icon="light_mode",style=ft.ButtonStyle(color={"":ft.colors.BLACK, "selected":ft.colors.WHITE}))
 
     countdown = Countdown(900)
@@ -303,6 +311,8 @@ def main (page: ft.Page):
     completeAll_sb = ft.SnackBar(content=ft.Text("Preencha todos os campos!",color=ft.colors.RED))
 
     initialForm = InitialForm(agetextfield_ref, coursetextfield_ref, genderradiobuttons_ref, schoolingdropdown_ref, elementsdropdown_ref,submitInitialForm)
+
+    finalForm = ft.FilledButton("Finalizar Teste",on_click=submitFinalForm)
 
     traininglist = [TrainingItem("Elementos de Apoio"),TrainingItem("Elementos Elasticos"),TrainingItem("Elementos de Fixacao"),TrainingItem("Elementos de Vedacao")]
     
