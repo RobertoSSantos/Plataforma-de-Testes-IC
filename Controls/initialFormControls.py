@@ -9,7 +9,7 @@ class Countdown(ft.UserControl):
     def did_mount(self):
         self.running = True
         self.th = threading.Thread(target=self.update_timer,args=(),daemon=True)
-        self.th.start()
+        self.th.start()       
 
     def will_unmount(self):
         self.running = False
@@ -18,7 +18,6 @@ class Countdown(ft.UserControl):
         t = self.seconds
         m,s = divmod(t, 60)
         formated_time = "{:02d}:{:02d}".format(m, s)
-        print(formated_time)
         return formated_time
     
     def update_timer(self):
@@ -47,6 +46,30 @@ class Basetextfield(ft.UserControl):
             width=self.width
         )
     
+class ValidationButton(ft.UserControl):
+    def __init__(self,ref,text,type,on_click):
+        super().__init__()
+        self.ref = ref
+        self.text = text
+        self.type = type
+        self.on_click = on_click
+    
+    def get_type(self):
+        type = self.type
+        return type
+    
+    def build(self):
+        return ft.FilledButton(
+            ref=self.ref,
+            text=self.text,
+            width=400,
+            height=50,
+            style=ft.ButtonStyle(
+                shape=ft.RoundedRectangleBorder(radius=10),
+            ),
+            on_click=self.on_click
+        )
+
 class Radiobuttons(ft.UserControl):
     def __init__ (self,reference):
         super().__init__()
@@ -112,7 +135,15 @@ class ImgTraining(ft.UserControl):
         self.src = src
     
     def build(self):
-        return ft.Image(src=self.src, width=200, height=200,fit=ft.ImageFit.NONE,repeat=ft.ImageRepeat.NO_REPEAT,border_radius=ft.border_radius.all(10))
+        return ft.Image(src=self.src, width=400, height=400,fit=ft.ImageFit.NONE,repeat=ft.ImageRepeat.NO_REPEAT,border_radius=ft.border_radius.all(10))
+
+class ValidationImage(ft.UserControl):
+    def __init__(self,src):
+        super().__init__()
+        self.src = src
+    
+    def build(self):
+        return ft.Image(src=self.src, width=400, height=400,fit=ft.ImageFit.NONE,repeat=ft.ImageRepeat.NO_REPEAT,border_radius=ft.border_radius.all(10))
 
 class InitialForm(ft.UserControl):
     def __init__(self, agetextfield_ref, coursetextfield_ref, genderradiobuttons_ref, schoolingdropdown_ref, elementsdropdown_ref,btn_onclick):
@@ -174,3 +205,35 @@ class TrainingPage(ft.UserControl):
     
     def build(self):
         return ft.Column(controls=self.traininglist)
+
+class ValidationPage(ft.UserControl):
+    def __init__(self,btn_1,btn_2,btn_3,btn_4):
+        super().__init__()
+        self.type = ""
+        self.level = ""
+        self.btn_1 = btn_1
+        self.btn_2 = btn_2
+        self.btn_3 = btn_3
+        self.btn_4 = btn_4
+
+    #images logic
+    '''
+    A partir do level setado, serao utilizados diferentes repositorios de imagens
+    '''
+
+    def get_type(self):
+        type = self.type
+        return type
+    
+    def build(self):
+        return ft.Column(horizontal_alignment=ft.MainAxisAlignment.CENTER,controls=[
+            ValidationImage("D:\ICpy\Plataforma de Testes IC\TrainingImages\Ved (2).jpg"),
+            self.btn_1,
+            self.btn_2,
+            self.btn_3,
+            self.btn_4    
+        ])
+'''
+def main(page:ft.Page): page.add(ValidationPage())
+ft.app(target=main)
+'''

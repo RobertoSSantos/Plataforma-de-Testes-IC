@@ -7,13 +7,40 @@ class InitialFormModel:
         self.elements = ""
 
 class EasyTestModel():
-    pass
+    def __init__(self):
+        self.trainingTime = ""
+        self.firstAnswer = ""
+        self.firstAnswerTime = ""
+        self.secondAnswer = ""
+        self.secondAnswerTime = ""
+        self.thirdAnswer = ""
+        self.thirdAnswerTime = ""
+        self.fourthAnswer = ""
+        self.fourthAnswerTime = ""
 
 class MediumTestModel():
-    pass
+    def __init__(self):
+        self.trainingTime = ""
+        self.firstAnswer = ""
+        self.firstAnswerTime = ""
+        self.secondAnswer = ""
+        self.secondAnswerTime = ""
+        self.thirdAnswer = ""
+        self.thirdAnswerTime = ""
+        self.fourthAnswer = ""
+        self.fourthAnswerTime = ""
 
 class HardTestModel():
-    pass
+    def __init__(self):
+        self.trainingTime = ""
+        self.firstAnswer = ""
+        self.firstAnswerTime = ""
+        self.secondAnswer = ""
+        self.secondAnswerTime = ""
+        self.thirdAnswer = ""
+        self.thirdAnswerTime = ""
+        self.fourthAnswer = ""
+        self.fourthAnswerTime = ""
 
 class FinalFormModel():
     pass
