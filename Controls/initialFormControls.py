@@ -118,9 +118,9 @@ class Elementsdropdown(ft.UserControl):
     def build(self):
         return ft.Dropdown(
             ref=self.reference,
-            label="Elementos de maquina",
+            label="nivel de conhecimento em elementos de máquina",
             hint_text="Qual seu nivel de conhecimento sobre elementos de maquina",
-            width=400,
+            width=430,
             options=[
                 ft.dropdown.Option("Nenhum"),
                 ft.dropdown.Option("Tenho pouco conhecimento"),

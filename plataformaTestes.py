@@ -47,7 +47,6 @@ def main (page: ft.Page):
         backup_validation_types = ["Elemento de Vedacao", "Elemento de Apoio", "Elemento de Fixacao", "Elemento Elastico"]
 
     def verify_answer(testmodel,val):
-        print(validation_count)
         if validation_count == 1 or validation_count == 6 or validation_count == 11:
             testmodel.firstAnswer = val
             testmodel.firstAnswerTime = countdown.get_current_time()
@@ -120,6 +119,7 @@ def main (page: ft.Page):
             verify_answer(hardTestModel,val)
         else:
             print("Error on validation")
+        print(val)
         validation_observer()
         #instanciar no objeto
     
@@ -137,6 +137,7 @@ def main (page: ft.Page):
             verify_answer(hardTestModel,val)
         else:
             print("Error on validation")
+            print(val)
         validation_observer()
         #instanciar no objeto
     
@@ -154,6 +155,7 @@ def main (page: ft.Page):
             verify_answer(hardTestModel,val)
         else:
             print("Error on validation")
+            print(val)
         validation_observer()
         #instanciar no objeto
     
@@ -171,6 +173,7 @@ def main (page: ft.Page):
             verify_answer(hardTestModel,val)
         else:
             print("Error on validation")
+            print(val)
         validation_observer()
         #instanciar no objeto
 
@@ -294,7 +297,7 @@ def main (page: ft.Page):
 
     toggledarklight = ft.IconButton(on_click=changetheme,icon="dark_mode",selected_icon="light_mode",style=ft.ButtonStyle(color={"":ft.colors.BLACK, "selected":ft.colors.WHITE}))
 
-    countdown = Countdown(900)
+    countdown = Countdown(1800)
 
     appbar = ft.AppBar(title= ft.Text("Formulario Inicial", size=30),center_title=True,bgcolor='blue',leading=ft.Icon(name="home"),actions=[toggledarklight])
     
